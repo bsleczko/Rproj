@@ -1,4 +1,3 @@
-library(readr)
 library(dplyr)
 library(tidyr)
 library(stringr)
@@ -38,7 +37,7 @@ eq_create_label <- function(df){
   locations <- df$LOCATION_NAME
   magnitude <- df$EQ_PRIMARY
   deaths <- df$DEATHS
-  
+
   ptxt <- rep("", len)
   for(i in 1:len){
     txt <- paste0("<b>Date: </b>", date[i], "</br>",
@@ -52,12 +51,12 @@ eq_create_label <- function(df){
 
 noaa_df <- read.delim(file = "inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
   eq_location_clean() %>%
-  dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>% 
-  dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>% 
+  dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
+  dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
   dplyr::filter(lubridate::year(DATE) >= 2000)
 
-noaa_df %>% 
-  dplyr::mutate(popup_text = eq_create_label(.)) %>% 
+noaa_df %>%
+  dplyr::mutate(popup_text = eq_create_label(.)) %>%
   eq_map(annot_col = "popup_text") %>%
   print()
 
@@ -105,7 +104,7 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
                                    points <- grid::pointsGrob(coords$x, coords$y,
                                                               pch = coords$shape,
                                                               size = grid::unit(coords$size / 5.5, "lines"),
-                                                              gp = gpar(col = alpha(coords$colour, coords$alpha), 
+                                                              gp = gpar(col = alpha(coords$colour, coords$alpha),
                                                                         fill = alpha(coords$colour, coords$alpha)
                                                               )
                                    )
@@ -138,8 +137,8 @@ geom_timeline <- function(mapping = NULL, data = NULL,
                           stat = "identity", position = "identity",
                           na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...) {
   ggplot2::layer(
-    geom = GeomTimeline, mapping = mapping,  
-    data = data, stat = stat, position = position, 
+    geom = GeomTimeline, mapping = mapping,
+    data = data, stat = stat, position = position,
     show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
@@ -200,10 +199,10 @@ GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
 geom_timeline_label <- function(mapping = NULL, data = NULL,
                                 stat = "identity", position = "identity",
                                 na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, n_max = 5, ...) {
-  
+
   data <- data %>% dplyr::mutate(COUNTRY = as.character(COUNTRY), EQ_PRIMARY = as.numeric(EQ_PRIMARY)) %>%
     dplyr::arrange(COUNTRY, desc(EQ_PRIMARY))
-  
+
   countries <- unique(data$COUNTRY)
   df_all <- data.frame()
   for(country in countries){
@@ -211,7 +210,7 @@ geom_timeline_label <- function(mapping = NULL, data = NULL,
     df_all <- rbind(df_all, df)
   }
   data <- df_all
-  
+
   ggplot2::layer(
     geom = GeomTimelineLabel,
     mapping = mapping,
