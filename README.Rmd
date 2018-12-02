@@ -82,3 +82,4 @@ noaa_df %>%
 
 ```
 
+<img src="man/figures/Capture.PNG" width="100%" />

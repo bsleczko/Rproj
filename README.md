@@ -83,3 +83,5 @@ noaa_df %>%
   eq_map(annot_col = "popup_text") %>%
   print()
 ```
+
+<img src="man/figures/Capture.PNG" width="100%" />
