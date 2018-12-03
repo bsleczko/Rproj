@@ -1,9 +1,12 @@
-library(rcap)
-context("Testing that the geoms run and return the correct objects")
+context("test-example.R")
+library(dplyr)
+library(lubridate)
+library(Rproj)
+library(ggplot2)
 
 test_that("geom_timeline runs correctly", {
-  noaa_df <- read.delim(file = "inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
-    eq_location_clean() %>%
+  noaa_df <- read.delim(file = "../../inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
+    Rproj::eq_location_clean() %>%
     dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
     dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
     dplyr::filter(lubridate::year(DATE) >= 2000)
@@ -24,8 +27,8 @@ test_that("geom_timeline runs correctly", {
 })
 
 test_that("geom_timeline_label runs correctly", {
-  noaa_df <- read.delim(file = "inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
-    eq_location_clean() %>%
+  noaa_df <- read.delim(file = "../../inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
+    Rproj::eq_location_clean() %>%
     dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
     dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
     dplyr::filter(lubridate::year(DATE) >= 2000)
