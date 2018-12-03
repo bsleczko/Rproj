@@ -12,7 +12,7 @@ test_that("geom_timeline runs correctly", {
   plt <- ggplot2::ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
                       color = as.numeric(TOTAL_DEATHS),
                       size = as.numeric(EQ_PRIMARY))) +
-    geom_timeline() +
+    Rproj::geom_timeline() +
     labs(size = "Richter scale", color = "# deaths") +
     ggplot2::theme(panel.background = ggplot2::element_blank(),
                    legend.position = "right",
@@ -34,7 +34,7 @@ test_that("geom_timeline_label runs correctly", {
   plt <- ggplot2::ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
                                       color = as.numeric(TOTAL_DEATHS),
                                       size = as.numeric(EQ_PRIMARY))) +
-    geom_timeline_label(data = noaa_df) +
+    Rproj::geom_timeline_label(data = noaa_df) +
     labs(size = "Richter scale", color = "# deaths") +
     ggplot2::theme(panel.background = ggplot2::element_blank(),
                    legend.position = "right",

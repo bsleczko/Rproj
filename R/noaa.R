@@ -6,6 +6,10 @@ library(ggplot2)
 library(grid)
 library(leaflet)
 
+#' @title NAto01
+#' @import stringr
+#' @export
+#' @example \dontrun{NAto01(noaa_df$MONTH)}
 NAto01 <- function(vector){
   sapply(vector, function(x){
     if(is.na(x)) return("01")
@@ -13,13 +17,21 @@ NAto01 <- function(vector){
     })
 }
 
+#' @title eq_location_clean
+#' @import stringr
+#' @export
+#' @example \dontrun{eq_location_clean(noaa_df)}
 eq_location_clean <- function(df){
   df <- df %>%
-    mutate(LOCATION_NAME = str_match(LOCATION_NAME, "(?<=:  )([:graph:]|[:blank:])+")[,1]) %>%
-    mutate(LOCATION_NAME = str_to_title(LOCATION_NAME))
+    dplyr::mutate(LOCATION_NAME = stringr::str_match(LOCATION_NAME, "(?<=:  )([:graph:]|[:blank:])+")[,1]) %>%
+    dplyr::mutate(LOCATION_NAME = str_to_title(LOCATION_NAME))
   return(df)
 }
 
+#' @title eq_map
+#' @import leaflet
+#' @export
+#' @example \dontrun{eq_map(noaa_df, "DATE")}
 eq_map <- function(df, annot_col){
   lmap <- df %>% leaflet::leaflet() %>% leaflet::addTiles() %>%
     leaflet::addCircleMarkers(lng=df$LONGITUDE,
@@ -31,6 +43,9 @@ eq_map <- function(df, annot_col){
                               opacity=0.5)
 }
 
+#' @title eq_create_label
+#' @export
+#' @example \dontrun{eq_create_label(noaa_df)}
 eq_create_label <- function(df){
   len <- length(df$LOCATION_NAME)
   date <- df$DATE
@@ -49,38 +64,6 @@ eq_create_label <- function(df){
   return(ptxt)
 }
 
-noaa_df <- read.delim(file = "inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
-  eq_location_clean() %>%
-  dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
-  dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
-  dplyr::filter(lubridate::year(DATE) >= 2000)
-
-noaa_df %>%
-  dplyr::mutate(popup_text = eq_create_label(.)) %>%
-  eq_map(annot_col = "popup_text") %>%
-  print()
-
-ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
-                    color = as.numeric(TOTAL_DEATHS),
-                    size = as.numeric(EQ_PRIMARY))) +
-  geom_timeline() +
-  labs(size = "Richter scale", color = "# deaths") +
-  ggplot2::theme(panel.background = ggplot2::element_blank(),
-                 legend.position = "right",
-                 axis.title.y = ggplot2::element_blank()) +
-  ggplot2::xlab("DATE")
-
-ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
-                    color = as.numeric(TOTAL_DEATHS),
-                    size = as.numeric(EQ_PRIMARY),
-                    label = LOCATION_NAME)) +
-  geom_timeline() +
-  labs(size = "Richter scale", color = "# deaths") +
-  ggplot2::theme(panel.background = ggplot2::element_blank(),
-                 legend.position = "right",
-                 axis.title.y = ggplot2::element_blank()) + ggplot2::xlab("DATE") +
-  geom_timeline_label(data = noaa_df)
-
 
 ##########################################
 #' @title GeomTimeline class definition
@@ -89,7 +72,6 @@ ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
 #'
 #' @import ggplot2
 #' @import grid
-#' @import scales
 #'
 #' @export
 #'
@@ -226,3 +208,39 @@ geom_timeline_label <- function(mapping = NULL, data = NULL,
     params = list(na.rm = na.rm, ...)
   )
 }
+##########################################
+
+
+noaa_df <- read.delim(file = "inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
+  eq_location_clean() %>%
+  dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
+  dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
+  dplyr::filter(lubridate::year(DATE) >= 2000)
+
+noaa_df %>%
+  dplyr::mutate(popup_text = eq_create_label(.)) %>%
+  eq_map(annot_col = "popup_text") %>%
+  print()
+
+ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
+                    color = as.numeric(TOTAL_DEATHS),
+                    size = as.numeric(EQ_PRIMARY))) +
+  geom_timeline() +
+  labs(size = "Richter scale", color = "# deaths") +
+  ggplot2::theme(panel.background = ggplot2::element_blank(),
+                 legend.position = "right",
+                 axis.title.y = ggplot2::element_blank()) +
+  ggplot2::xlab("DATE")
+
+ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
+                    color = as.numeric(TOTAL_DEATHS),
+                    size = as.numeric(EQ_PRIMARY),
+                    label = LOCATION_NAME)) +
+  geom_timeline() +
+  labs(size = "Richter scale", color = "# deaths") +
+  ggplot2::theme(panel.background = ggplot2::element_blank(),
+                 legend.position = "right",
+                 axis.title.y = ggplot2::element_blank()) + ggplot2::xlab("DATE") +
+  geom_timeline_label(data = noaa_df)
+
+
