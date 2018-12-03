@@ -10,5 +10,12 @@ LazyData: true
 Suggests: 
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    dplyr,
+    tidyr,
+    stringr,
+    lubridate,
+    ggplot2,
+    grid,
+    leaflet
 VignetteBuilder: knitr
