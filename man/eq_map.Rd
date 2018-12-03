@@ -6,6 +6,11 @@
 \usage{
 eq_map(df, annot_col)
 }
+\arguments{
+\item{df}{noaa df}
+
+\item{annot_col}{"DATE" or "popup_text"}
+}
 \description{
 eq_map
 }

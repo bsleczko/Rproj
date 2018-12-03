@@ -8,6 +8,21 @@ geom_timeline(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE, ...)
 }
+\arguments{
+\item{mapping}{Set of aesthetic mappings created by aes() or aes_()}
+
+\item{data}{The data to be displayed in this layer}
+
+\item{stat}{The statistical transformation to use on the data for this layer, as a string}
+
+\item{position}{Position adjustment, either as a string, or the result of a call to a position adjustment function}
+
+\item{na.rm}{Parameter to be passed to stat and geom}
+
+\item{show.legend}{(logical) Should this layer be included in the legends? NA includes if any aes are mapped}
+
+\item{inherit.aes}{If FALSE, overrides the default aesthetics, rather than combining with them}
+}
 \description{
 Using new geom class we can plot the timelines
 }

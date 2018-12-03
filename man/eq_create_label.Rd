@@ -6,6 +6,9 @@
 \usage{
 eq_create_label(df)
 }
+\arguments{
+\item{df}{noaa df}
+}
 \description{
 eq_create_label
 }

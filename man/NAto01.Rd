@@ -6,6 +6,9 @@
 \usage{
 NAto01(vector)
 }
+\arguments{
+\item{vector}{vector with values}
+}
 \description{
 NAto01
 }

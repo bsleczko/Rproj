@@ -6,6 +6,9 @@
 \usage{
 eq_location_clean(df)
 }
+\arguments{
+\item{df}{noaa df}
+}
 \description{
 eq_location_clean
 }

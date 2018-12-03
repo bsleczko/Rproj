@@ -8,6 +8,7 @@ library(leaflet)
 
 
 #' @title NAto01
+#' @param vector vector with values
 #' @import stringr
 #' @export
 #' @example \dontrun{NAto01(noaa_df$MONTH)}
@@ -19,6 +20,7 @@ NAto01 <- function(vector){
 }
 
 #' @title eq_location_clean
+#' @param df noaa df
 #' @import stringr
 #' @export
 #' @example \dontrun{eq_location_clean(noaa_df)}
@@ -30,6 +32,8 @@ eq_location_clean <- function(df){
 }
 
 #' @title eq_map
+#' @param df noaa df
+#' @param annot_col "DATE" or "popup_text"
 #' @import leaflet
 #' @export
 #' @example \dontrun{eq_map(noaa_df, "DATE")}
@@ -45,6 +49,7 @@ eq_map <- function(df, annot_col){
 }
 
 #' @title eq_create_label
+#' @param df noaa df
 #' @export
 #' @example \dontrun{eq_create_label(noaa_df)}
 eq_create_label <- function(df){
@@ -73,7 +78,7 @@ eq_create_label <- function(df){
 #'
 eq_read_data <- function(){
   filepath = system.file("extdata", sprintf("signif.txt", year), package="Rproj")
-  return(read.delim(file = filepath, stringsAsFactors = FALSE))
+  return(utils::read.delim(file = filepath, stringsAsFactors = FALSE))
 }
 
 ##########################################
@@ -115,6 +120,14 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
 #' @title geom_timeline function definition
 #'
 #' @description Using new geom class we can plot the timelines
+#'
+#' @param mapping Set of aesthetic mappings created by aes() or aes_()
+#' @param data The data to be displayed in this layer
+#' @param stat The statistical transformation to use on the data for this layer, as a string
+#' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function
+#' @param na.rm Parameter to be passed to stat and geom
+#' @param show.legend (logical) Should this layer be included in the legends? NA includes if any aes are mapped
+#' @param inherit.aes If FALSE, overrides the default aesthetics, rather than combining with them
 #'
 #' @import ggplot2
 #'
@@ -180,6 +193,15 @@ GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
 #'
 #' @description Using new geom class we can plot the timeline labels
 #'
+#' @param mapping Set of aesthetic mappings created by aes() or aes_()
+#' @param data The data to be displayed in this layer
+#' @param stat The statistical transformation to use on the data for this layer, as a string
+#' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function
+#' @param na.rm Parameter to be passed to stat and geom
+#' @param show.legend (logical) Should this layer be included in the legends? NA includes if any aes are mapped
+#' @param inherit.aes If FALSE, overrides the default aesthetics, rather than combining with them
+#' @param n_max Max number of labels
+#'
 #' @import ggplot2
 #' @import dplyr
 #'
@@ -222,36 +244,76 @@ geom_timeline_label <- function(mapping = NULL, data = NULL,
 ##########################################
 
 
-noaa_df <- eq_read_data() %>%
-  eq_location_clean() %>%
-  dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
-  dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
-  dplyr::filter(lubridate::year(DATE) >= 2000)
+#'
+#' @title eq_clean_noaa
+#' @param countries list of countries
+#' @param lbyear Lower bound - years
+#' @export
+#' @example \dontrun{eq_clean_noaa()}
+#'
+eq_clean_noaa <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
+  noaa_df <- eq_read_data() %>%
+    eq_location_clean() %>%
+    dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
+    dplyr::filter(COUNTRY == countries[1] | COUNTRY == countries[2]) %>%
+    dplyr::filter(lubridate::year(DATE) >= lbyear)
+  return(noaa_df)
+}
 
-noaa_df %>%
-  dplyr::mutate(popup_text = eq_create_label(.)) %>%
-  eq_map(annot_col = "popup_text") %>%
-  print()
 
-ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
-                    color = as.numeric(TOTAL_DEATHS),
-                    size = as.numeric(EQ_PRIMARY))) +
-  geom_timeline() +
-  labs(size = "Richter scale", color = "# deaths") +
-  ggplot2::theme(panel.background = ggplot2::element_blank(),
-                 legend.position = "right",
-                 axis.title.y = ggplot2::element_blank()) +
-  ggplot2::xlab("DATE")
+#'
+#' @title eq_plot_ex_map
+#' @param countries list of countries
+#' @param lbyear Lower bound - years
+#' @export
+#' @example \dontrun{eq_plot_map()}
+#'
+eq_plot_map <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
+  eq_clean_noaa() %>%
+    dplyr::mutate(popup_text = eq_create_label(.)) %>%
+    eq_map(annot_col = "popup_text") %>%
+    print()
+}
 
-ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
-                    color = as.numeric(TOTAL_DEATHS),
-                    size = as.numeric(EQ_PRIMARY),
-                    label = LOCATION_NAME)) +
-  geom_timeline() +
-  labs(size = "Richter scale", color = "# deaths") +
-  ggplot2::theme(panel.background = ggplot2::element_blank(),
-                 legend.position = "right",
-                 axis.title.y = ggplot2::element_blank()) + ggplot2::xlab("DATE") +
-  geom_timeline_label(data = noaa_df)
+#'
+#' @title eq_plot_timeline
+#' @param countries list of countries
+#' @param lbyear Lower bound - years
+#' @export
+#' @example \dontrun{eq_plot_timeline()}
+#'
+eq_plot_timeline <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
+  eq_clean_noaa(countries = countries, lbyear = lbyear) %>%
+    ggplot(aes(x = as.Date(DATE), y = COUNTRY,
+                                      color = as.numeric(TOTAL_DEATHS),
+                                      size = as.numeric(EQ_PRIMARY))) +
+    geom_timeline() +
+    labs(size = "Richter scale", color = "# deaths") +
+    ggplot2::theme(panel.background = ggplot2::element_blank(),
+                   legend.position = "right",
+                   axis.title.y = ggplot2::element_blank()) +
+    ggplot2::xlab("DATE")
+}
+
+#'
+#' @title eq_plot_timeline_w_labels
+#' @param countries list of countries
+#' @param lbyear Lower bound - years
+#' @export
+#' @example \dontrun{eq_plot_timeline_w_labels()}
+#'
+eq_plot_timeline_w_labels <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
+  eq_clean_noaa(countries = countries, lbyear = lbyear) %>%
+    ggplot(aes(x = as.Date(DATE), y = COUNTRY,
+                        color = as.numeric(TOTAL_DEATHS),
+                        size = as.numeric(EQ_PRIMARY),
+                        label = LOCATION_NAME)) +
+    geom_timeline() +
+    labs(size = "Richter scale", color = "# deaths") +
+    ggplot2::theme(panel.background = ggplot2::element_blank(),
+                   legend.position = "right",
+                   axis.title.y = ggplot2::element_blank()) + ggplot2::xlab("DATE") +
+    geom_timeline_label(data = noaa_df)
+}
 
 
