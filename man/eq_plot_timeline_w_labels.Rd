@@ -13,5 +13,5 @@ eq_plot_timeline_w_labels(countries = c("MEXICO", "GUATEMALA"),
 \item{lbyear}{Lower bound - years}
 }
 \description{
-eq_plot_timeline_w_labels
+Ha ha ha
 }

@@ -8,6 +8,7 @@ library(leaflet)
 
 
 #' @title NAto01
+#' @description Ha ha ha
 #' @param vector vector with values
 #' @import stringr
 #' @export
@@ -20,6 +21,7 @@ NAto01 <- function(vector){
 }
 
 #' @title eq_location_clean
+#' @description Ha ha ha
 #' @param df noaa df
 #' @import stringr
 #' @export
@@ -32,6 +34,7 @@ eq_location_clean <- function(df){
 }
 
 #' @title eq_map
+#' @description Ha ha ha
 #' @param df noaa df
 #' @param annot_col "DATE" or "popup_text"
 #' @import leaflet
@@ -49,6 +52,7 @@ eq_map <- function(df, annot_col){
 }
 
 #' @title eq_create_label
+#' @description Ha ha ha
 #' @param df noaa df
 #' @export
 #' @example \dontrun{eq_create_label(noaa_df)}
@@ -73,6 +77,7 @@ eq_create_label <- function(df){
 
 #'
 #' @title eq_read_data
+#' @description Ha ha ha
 #' @export
 #' @example \dontrun{eq_read_data()}
 #'
@@ -246,6 +251,7 @@ geom_timeline_label <- function(mapping = NULL, data = NULL,
 
 #'
 #' @title eq_clean_noaa
+#' @description Ha ha ha
 #' @param countries list of countries
 #' @param lbyear Lower bound - years
 #' @export
@@ -263,6 +269,7 @@ eq_clean_noaa <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
 
 #'
 #' @title eq_plot_ex_map
+#' @description Ha ha ha
 #' @param countries list of countries
 #' @param lbyear Lower bound - years
 #' @export
@@ -277,6 +284,7 @@ eq_plot_map <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
 
 #'
 #' @title eq_plot_timeline
+#' @description Ha ha ha
 #' @param countries list of countries
 #' @param lbyear Lower bound - years
 #' @export
@@ -297,6 +305,7 @@ eq_plot_timeline <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000
 
 #'
 #' @title eq_plot_timeline_w_labels
+#' @description Ha ha ha
 #' @param countries list of countries
 #' @param lbyear Lower bound - years
 #' @export

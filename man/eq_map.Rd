@@ -12,5 +12,5 @@ eq_map(df, annot_col)
 \item{annot_col}{"DATE" or "popup_text"}
 }
 \description{
-eq_map
+Ha ha ha
 }

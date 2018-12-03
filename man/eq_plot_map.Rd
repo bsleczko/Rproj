@@ -12,5 +12,5 @@ eq_plot_map(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000)
 \item{lbyear}{Lower bound - years}
 }
 \description{
-eq_plot_ex_map
+Ha ha ha
 }

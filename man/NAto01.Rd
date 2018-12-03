@@ -10,5 +10,5 @@ NAto01(vector)
 \item{vector}{vector with values}
 }
 \description{
-NAto01
+Ha ha ha
 }

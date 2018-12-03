@@ -12,5 +12,5 @@ eq_clean_noaa(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000)
 \item{lbyear}{Lower bound - years}
 }
 \description{
-eq_clean_noaa
+Ha ha ha
 }

@@ -10,5 +10,5 @@ eq_location_clean(df)
 \item{df}{noaa df}
 }
 \description{
-eq_location_clean
+Ha ha ha
 }
