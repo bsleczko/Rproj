@@ -144,6 +144,7 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
 #' @param na.rm Parameter to be passed to stat and geom
 #' @param show.legend (logical) Should this layer be included in the legends? NA includes if any aes are mapped
 #' @param inherit.aes If FALSE, overrides the default aesthetics, rather than combining with them
+#' @param ... Other possible arguments
 #'
 #' @import ggplot2
 #'
@@ -219,6 +220,7 @@ GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
 #' @param show.legend (logical) Should this layer be included in the legends? NA includes if any aes are mapped
 #' @param inherit.aes If FALSE, overrides the default aesthetics, rather than combining with them
 #' @param n_max Max number of labels
+#' @param ... Other possible arguments
 #'
 #' @import ggplot2
 #' @import dplyr
