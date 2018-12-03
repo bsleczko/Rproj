@@ -9,3 +9,10 @@ eq_read_data()
 \description{
 Ha ha ha
 }
+\details{
+Ne ne ne
+}
+\examples{
+\dontrun{eq_read_data()}
+
+}

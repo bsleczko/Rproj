@@ -15,3 +15,10 @@ eq_plot_timeline_w_labels(countries = c("MEXICO", "GUATEMALA"),
 \description{
 Ha ha ha
 }
+\details{
+Ne ne ne
+}
+\examples{
+\dontrun{eq_plot_timeline_w_labels()}
+
+}

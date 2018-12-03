@@ -12,3 +12,9 @@ NAto01(vector)
 \description{
 Ha ha ha
 }
+\details{
+Ne ne ne
+}
+\examples{
+\dontrun{NAto01(noaa_df$MONTH)}
+}

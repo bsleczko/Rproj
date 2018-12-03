@@ -14,3 +14,10 @@ eq_clean_noaa(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000)
 \description{
 Ha ha ha
 }
+\details{
+Ne ne ne
+}
+\examples{
+\dontrun{eq_clean_noaa()}
+
+}

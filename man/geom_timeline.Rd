@@ -26,6 +26,9 @@ geom_timeline(mapping = NULL, data = NULL, stat = "identity",
 \description{
 Using new geom class we can plot the timelines
 }
+\details{
+Ne ne ne
+}
 \examples{
 \dontrun{
  ggplot(noaa_df, aes(x = DATE, y = COUNTRY,

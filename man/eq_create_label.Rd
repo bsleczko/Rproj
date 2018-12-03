@@ -12,3 +12,9 @@ eq_create_label(df)
 \description{
 Ha ha ha
 }
+\details{
+Ne ne ne
+}
+\examples{
+\dontrun{eq_create_label(noaa_df)}
+}

@@ -28,6 +28,9 @@ geom_timeline_label(mapping = NULL, data = NULL, stat = "identity",
 \description{
 Using new geom class we can plot the timeline labels
 }
+\details{
+Ne ne ne
+}
 \examples{
 \dontrun{
  ggplot(noaa_df, aes(x = DATE, y = COUNTRY,

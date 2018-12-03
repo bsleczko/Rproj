@@ -11,6 +11,9 @@ GeomTimelineLabel
 \description{
 ggproto() constructs a new geom class
 }
+\details{
+Ne ne ne
+}
 \examples{
 \dontrun{
  No example, this is part of ggplot2 geom function defintion

@@ -9,10 +9,12 @@ library(leaflet)
 
 #' @title NAto01
 #' @description Ha ha ha
+#' @details Ne ne ne
 #' @param vector vector with values
 #' @import stringr
 #' @export
-#' @example \dontrun{NAto01(noaa_df$MONTH)}
+#' @examples
+#' \dontrun{NAto01(noaa_df$MONTH)}
 NAto01 <- function(vector){
   sapply(vector, function(x){
     if(is.na(x)) return("01")
@@ -22,10 +24,12 @@ NAto01 <- function(vector){
 
 #' @title eq_location_clean
 #' @description Ha ha ha
+#' @details Ne ne ne
 #' @param df noaa df
 #' @import stringr
 #' @export
-#' @example \dontrun{eq_location_clean(noaa_df)}
+#' @examples
+#' \dontrun{eq_location_clean(noaa_df)}
 eq_location_clean <- function(df){
   df <- df %>%
     dplyr::mutate(LOCATION_NAME = stringr::str_match(LOCATION_NAME, "(?<=:  )([:graph:]|[:blank:])+")[,1]) %>%
@@ -35,11 +39,13 @@ eq_location_clean <- function(df){
 
 #' @title eq_map
 #' @description Ha ha ha
+#' @details Ne ne ne
 #' @param df noaa df
 #' @param annot_col "DATE" or "popup_text"
 #' @import leaflet
 #' @export
-#' @example \dontrun{eq_map(noaa_df, "DATE")}
+#' @examples
+#' \dontrun{eq_map(noaa_df, "DATE")}
 eq_map <- function(df, annot_col){
   lmap <- df %>% leaflet::leaflet() %>% leaflet::addTiles() %>%
     leaflet::addCircleMarkers(lng=df$LONGITUDE,
@@ -53,9 +59,11 @@ eq_map <- function(df, annot_col){
 
 #' @title eq_create_label
 #' @description Ha ha ha
+#' @details Ne ne ne
 #' @param df noaa df
 #' @export
-#' @example \dontrun{eq_create_label(noaa_df)}
+#' @examples
+#' \dontrun{eq_create_label(noaa_df)}
 eq_create_label <- function(df){
   len <- length(df$LOCATION_NAME)
   date <- df$DATE
@@ -78,8 +86,10 @@ eq_create_label <- function(df){
 #'
 #' @title eq_read_data
 #' @description Ha ha ha
+#' @details Ne ne ne
 #' @export
-#' @example \dontrun{eq_read_data()}
+#' @examples
+#' \dontrun{eq_read_data()}
 #'
 eq_read_data <- function(){
   filepath = system.file("extdata", sprintf("signif.txt", year), package="Rproj")
@@ -90,6 +100,7 @@ eq_read_data <- function(){
 #' @title GeomTimeline class definition
 #'
 #' @description ggproto() constructs a new geom class
+#' @details Ne ne ne
 #'
 #' @import ggplot2
 #' @import grid
@@ -137,6 +148,7 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
 #' @import ggplot2
 #'
 #' @export
+#' @details Ne ne ne
 #'
 #' @examples
 #' \dontrun{
@@ -166,6 +178,7 @@ geom_timeline <- function(mapping = NULL, data = NULL,
 #' @import grid
 #'
 #' @export
+#' @details Ne ne ne
 #'
 #' @examples
 #' \dontrun{
@@ -211,6 +224,7 @@ GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
 #' @import dplyr
 #'
 #' @export
+#' @details Ne ne ne
 #'
 #' @examples
 #' \dontrun{
@@ -255,7 +269,9 @@ geom_timeline_label <- function(mapping = NULL, data = NULL,
 #' @param countries list of countries
 #' @param lbyear Lower bound - years
 #' @export
-#' @example \dontrun{eq_clean_noaa()}
+#' @details Ne ne ne
+#' @examples
+#' \dontrun{eq_clean_noaa()}
 #'
 eq_clean_noaa <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
   noaa_df <- eq_read_data() %>%
@@ -273,7 +289,9 @@ eq_clean_noaa <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
 #' @param countries list of countries
 #' @param lbyear Lower bound - years
 #' @export
-#' @example \dontrun{eq_plot_map()}
+#' @details Ne ne ne
+#' @examples
+#' \dontrun{eq_plot_map()}
 #'
 eq_plot_map <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
   eq_clean_noaa() %>%
@@ -288,7 +306,9 @@ eq_plot_map <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
 #' @param countries list of countries
 #' @param lbyear Lower bound - years
 #' @export
-#' @example \dontrun{eq_plot_timeline()}
+#' @details Ne ne ne
+#' @examples
+#' \dontrun{eq_plot_timeline()}
 #'
 eq_plot_timeline <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
   eq_clean_noaa(countries = countries, lbyear = lbyear) %>%
@@ -309,7 +329,9 @@ eq_plot_timeline <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000
 #' @param countries list of countries
 #' @param lbyear Lower bound - years
 #' @export
-#' @example \dontrun{eq_plot_timeline_w_labels()}
+#' @details Ne ne ne
+#' @examples
+#' \dontrun{eq_plot_timeline_w_labels()}
 #'
 eq_plot_timeline_w_labels <- function(countries = c("MEXICO", "GUATEMALA"), lbyear = 2000){
   eq_clean_noaa(countries = countries, lbyear = lbyear) %>%

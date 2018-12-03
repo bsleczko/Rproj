@@ -14,3 +14,9 @@ eq_map(df, annot_col)
 \description{
 Ha ha ha
 }
+\details{
+Ne ne ne
+}
+\examples{
+\dontrun{eq_map(noaa_df, "DATE")}
+}

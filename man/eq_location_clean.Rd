@@ -12,3 +12,9 @@ eq_location_clean(df)
 \description{
 Ha ha ha
 }
+\details{
+Ne ne ne
+}
+\examples{
+\dontrun{eq_location_clean(noaa_df)}
+}
