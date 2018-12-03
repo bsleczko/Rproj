@@ -17,6 +17,13 @@ NAto01 <- function(vector){
     })
 }
 
+#' @title eq_read
+#' @export
+#' @example \dontrun{eq_read()}
+eq_read <- function(){
+  read.delim(file = "inst/extdata/signif.txt", stringsAsFactors = FALSE)
+}
+
 #' @title eq_location_clean
 #' @import stringr
 #' @export
@@ -211,7 +218,7 @@ geom_timeline_label <- function(mapping = NULL, data = NULL,
 ##########################################
 
 
-noaa_df <- read.delim(file = "inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
+noaa_df <- eq_read() %>%
   eq_location_clean() %>%
   dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
   dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%

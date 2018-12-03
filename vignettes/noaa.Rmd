@@ -26,7 +26,7 @@ library(dplyr)
 library(Rproj)
 library(ggplot2)
 
-noaa_df <- read.delim(file = "../inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
+noaa_df <- Rproj::eq_read() %>%
   Rproj::eq_location_clean() %>%
   dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>% 
   dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>% 
@@ -52,7 +52,7 @@ library(dplyr)
 library(Rproj)
 library(ggplot2)
 
-noaa_df <- read.delim(file = "../inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
+noaa_df <- Rproj::eq_read() %>%
   Rproj::eq_location_clean() %>%
   dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>% 
   dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>% 
@@ -78,7 +78,7 @@ library(dplyr)
 library(Rproj)
 library(ggplot2)
 
-noaa_df <- read.delim(file = "../inst/extdata/signif.txt", stringsAsFactors = FALSE) %>%
+noaa_df <- Rproj::eq_read() %>%
   eq_location_clean() %>%
   dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>% 
   dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>% 
