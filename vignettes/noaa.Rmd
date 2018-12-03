@@ -79,7 +79,7 @@ library(Rproj)
 library(ggplot2)
 
 noaa_df <- Rproj::eq_read() %>%
-  eq_location_clean() %>%
+  Rproj::eq_location_clean() %>%
   dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>% 
   dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>% 
   dplyr::filter(lubridate::year(DATE) >= 2000)
