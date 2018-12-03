@@ -5,7 +5,7 @@ library(Rproj)
 library(ggplot2)
 
 test_that("geom_timeline runs correctly", {
-  noaa_df <- Rproj::eq_read() %>%
+  noaa_df <- Rproj::eq_read_data() %>%
     Rproj::eq_location_clean() %>%
     dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
     dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
@@ -27,7 +27,7 @@ test_that("geom_timeline runs correctly", {
 })
 
 test_that("geom_timeline_label runs correctly", {
-  noaa_df <- Rproj::eq_read() %>%
+  noaa_df <- Rproj::eq_read_data() %>%
     Rproj::eq_location_clean() %>%
     dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
     dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
