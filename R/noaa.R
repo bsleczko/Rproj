@@ -6,6 +6,7 @@ library(ggplot2)
 library(grid)
 library(leaflet)
 
+
 #' @title NAto01
 #' @import stringr
 #' @export
@@ -15,13 +16,6 @@ NAto01 <- function(vector){
     if(is.na(x)) return("01")
     else return(as.character(str_pad(x, width=2, side="left", pad="0")))
     })
-}
-
-#' @title eq_read
-#' @export
-#' @example \dontrun{eq_read()}
-eq_read <- function(){
-  read.delim(file = "inst/extdata/signif.txt", stringsAsFactors = FALSE)
 }
 
 #' @title eq_location_clean
@@ -71,6 +65,16 @@ eq_create_label <- function(df){
   return(ptxt)
 }
 
+
+#'
+#' @title eq_read_data
+#' @export
+#' @example \dontrun{eq_read_data()}
+#'
+eq_read_data <- function(){
+  filepath = system.file("extdata", sprintf("signif.txt", year), package="Rproj")
+  return(read.delim(file = filepath, stringsAsFactors = FALSE))
+}
 
 ##########################################
 #' @title GeomTimeline class definition
@@ -218,7 +222,7 @@ geom_timeline_label <- function(mapping = NULL, data = NULL,
 ##########################################
 
 
-noaa_df <- eq_read() %>%
+noaa_df <- eq_read_data() %>%
   eq_location_clean() %>%
   dplyr::mutate(DATE = paste(YEAR, NAto01(MONTH), NAto01(DAY), sep = "-")) %>%
   dplyr::filter(COUNTRY == "MEXICO" | COUNTRY == "GUATEMALA") %>%
