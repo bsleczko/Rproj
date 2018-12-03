@@ -7,15 +7,16 @@ Depends: R (>= 3.5.1)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Imports: dplyr,
+    tidyr,
+    stringr,
+    ggplot2,
+    grid,
+    leaflet,
+    lubridate
 Suggests: 
     knitr,
     rmarkdown,
-    testthat,
-    dplyr,
-    tidyr,
-    stringr,
-    lubridate,
-    ggplot2,
-    grid,
-    leaflet
+    testthat
 VignetteBuilder: knitr
+RoxygenNote: 6.1.0

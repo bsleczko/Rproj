@@ -87,7 +87,9 @@ ggplot(noaa_df, aes(x = as.Date(DATE), y = COUNTRY,
 #'
 #' @description ggproto() constructs a new geom class
 #'
-#' @import ggplot2, grid, scales
+#' @import ggplot2
+#' @import grid
+#' @import scales
 #'
 #' @export
 #'
@@ -149,7 +151,8 @@ geom_timeline <- function(mapping = NULL, data = NULL,
 #'
 #' @description ggproto() constructs a new geom class
 #'
-#' @import ggplot2, grid
+#' @import ggplot2
+#' @import grid
 #'
 #' @export
 #'
@@ -185,6 +188,7 @@ GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
 #' @description Using new geom class we can plot the timeline labels
 #'
 #' @import ggplot2
+#' @import dplyr
 #'
 #' @export
 #'
