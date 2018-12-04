@@ -22,6 +22,8 @@ geom_timeline(mapping = NULL, data = NULL, stat = "identity",
 \item{show.legend}{(logical) Should this layer be included in the legends? NA includes if any aes are mapped}
 
 \item{inherit.aes}{If FALSE, overrides the default aesthetics, rather than combining with them}
+
+\item{...}{Other possible arguments}
 }
 \description{
 Using new geom class we can plot the timelines

@@ -24,6 +24,8 @@ geom_timeline_label(mapping = NULL, data = NULL, stat = "identity",
 \item{inherit.aes}{If FALSE, overrides the default aesthetics, rather than combining with them}
 
 \item{n_max}{Max number of labels}
+
+\item{...}{Other possible arguments}
 }
 \description{
 Using new geom class we can plot the timeline labels
